@@ -213,26 +213,33 @@
 ## 参考図書
 
 * 初心者の人はこれを購入のこと
-    * [福田: これ１冊でできる！ラズベリー・パイ　超入門 改訂第4版、ソーテック社, 2017.](https://www.amazon.co.jp/dp/480071172X)
+    * 福田 :[これ１冊でできる！ラズベリー・パイ　超入門 改訂第4版](https://www.amazon.co.jp/dp/480071172X)、ソーテック社, 2017.<br />$ $
 * Linuxの操作
     * 初心者向け
         * [Piro（結城洋志）: シス管系女子, 日経BP, 2015.](https://www.amazon.co.jp/dp/4822224961)
     * 中級者〜
-        * [上田: シェルプログラミング実用テクニック, 技術評論社, 2015.](https://www.amazon.co.jp/dp/4774173444)
-* デバドラ関係
-    * [Corbet 他(著), 山崎 他(翻訳): Linuxデバイスドライバ 第3版, オライリージャパン, 2005.](https://www.amazon.co.jp/dp/4873112532)
-    * デバイスドライバのリファレンス
-    * ちょっと古い
-    * [英語ならネット上に](http://www.makelinux.net/ldd3/)
-* OS
-    * [Tanenbaum: オペレーティングシステム 第3版, ピアソンエデュケーション, 2007.](https://www.amazon.co.jp/dp/4894717697)
-        * 中古が出回っている
-    * [Bovet: 詳解 Linuxカーネル 第3版, オライリー・ジャパン, 2007.](https://www.amazon.co.jp/dp/487311313X)
-    * https://www.amazon.co.jp/%E8%A9%A6%E3%81%97%E3%81%A6%E7%90%86%E8%A7%A3-Linux%E3%81%AE%E3%81%97%E3%81%8F%E3%81%BF-%E5%AE%9F%E9%A8%93%E3%81%A8%E5%9B%B3%E8%A7%A3%E3%81%A7%E5%AD%A6%E3%81%B6OS%E3%81%A8%E3%83%8F%E3%83%BC%E3%83%89%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E6%AD%A6%E5%86%85-%E8%A6%9A/dp/477419607X/ref=sr_1_6?s=books&ie=UTF8&qid=1537491750&sr=1-6&keywords=%E6%8A%80%E8%A1%93%E8%A9%95%E8%AB%96%E7%A4%BE%E3%80%80%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0
+        * 上田: [シェルプログラミング実用テクニック](https://www.amazon.co.jp/dp/4774173444), 技術評論社, 2015.
 
 ---
 
-## 宿題: Raspberry Piのセットアップ
+* デバドラ関係
+    * Corbet 他(著), 山崎 他(翻訳): [Linuxデバイスドライバ 第3版](https://www.amazon.co.jp/dp/4873112532), オライリージャパン, 2005.
+        * デバイスドライバのリファレンス
+        * ちょっと古い
+        * [英語ならネット上に](http://www.makelinux.net/ldd3/)<br />$ $
+    * 米田: [Raspberry Piで学ぶ ARMデバイスドライバープログラミング](https://www.socym.co.jp/book/940), ソシム, 2014.
+
+---
+
+* OS
+    * Tanenbaum: [オペレーティングシステム 第3版](https://www.amazon.co.jp/dp/4894717697), ピアソンエデュケーション, 2007.
+        * 中古が出回っている
+    * Bovet: [詳解 Linuxカーネル 第3版](https://www.amazon.co.jp/dp/487311313X), オライリー・ジャパン, 2007.
+    * 竹内: [試して理解 Linuxのしくみ ~実験と図解で学ぶOSとハードウェアの基礎知識](https://www.amazon.co.jp/dp/477419607X)
+
+---
+
+## 宿題: <span style="text-transform:none">Raspberry Pi</span><br />のセットアップ
 
 * Raspberry Piを入手してRaspbianをインストールのこと
     * 初心者向けの指示: [NOOBS](https://www.raspberrypi.org/downloads/noobs/)を使ってRaspbianをインストールのこと
