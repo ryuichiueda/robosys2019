@@ -254,12 +254,9 @@
 
 ---
 
-## Raspberry Piの入出力
+## <span style="text-transform:none">Raspberry Pi</span>の入出力
 
-![](https://lab.ueda.tech/wp-content/uploads/2016/08/raspberrypi.png)
-
-* 上図: Raspberry Pi 2 Model B
-
+* 右図: Raspberry Pi 2 Model B
 * 電源入力: MicroUSB
 * ディスプレイへ出力: HDMI
 * ストレージ: microSDカード
@@ -269,18 +266,19 @@
     * 「GPIOピン」と呼ばれる
 * 他: 専用カメラの取り付け端子等
 
+<img width="35%" src="https://lab.ueda.tech/wp-content/uploads/2016/08/raspberrypi.png" />
 
 ---
 
 ## GPIOピンの構成
 
-* Raspberry Pi 2からRaspberry Pi 3 B+まで変わってない
+* Raspberry Pi 2からRaspberry Pi 3 B+まで変わってない<br />$ $
 * 配置（Model Bのもの）: http://pinout.xyz
     * 電源: 3.3V、5V
     * GND
     * GPIOピン: 27
         * うち何本かがI2C、SPI、UARTも使える
-    * I2C ID EEPROM用ピン
+    * I2C ID EEPROM用ピン<br />$ $
 * A/D変換機能は付いていない
 
 
@@ -298,11 +296,11 @@
 
 ---
 
-## Raspberry Piのソフトウェア
+## <span style="text-transform:none">Raspberry Pi</span>のソフトウェア
 
 * Linuxが標準
     * Raspbian
-    * Ubuntu
+    * Ubuntu<br />$ $
 * ロボットのコントローラとしてのLinux
     * 欠点: マイコンのように単純なリアルタイム制御ができない
     * 長所: 開発時、運用時にインターネットとシームレスに接続
