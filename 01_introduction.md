@@ -2,7 +2,7 @@
 
 上田 隆一
 
-2018年9月21日@千葉工業大学
+2019年9月20日@千葉工業大学
 
 
 
@@ -199,7 +199,7 @@
 
 * Raspberry Piを入手してRaspbianをインストールのこと
     * 初心者向けの指示: [NOOBS](https://www.raspberrypi.org/downloads/noobs/)を使ってRaspbianをインストールのこと
-        * 手順: [拙ブログ](https://b.ueda.tech/?post=20180905_raspi)
+        * 手順: https://b.ueda.tech/?post=20180905_raspi
         * 他の情報
             * ネット上に山のように情報
             * 「これ1冊で・・・」に詳しい解説
