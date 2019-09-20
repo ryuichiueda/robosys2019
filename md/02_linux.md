@@ -2,14 +2,17 @@
 
 上田 隆一
 
-2018年9月28日@千葉工業大学
+2019年9月27日@千葉工業大学
 
 
+
+---
 
 ## 今日の内容
 
 * ノートPCとラズパイを接続
 
+---
 
 ## やること
 
@@ -18,9 +21,9 @@
   * ラズパイ -> 有線LAN -> ノートPC -> ノートPCのWiFi -> インターネット
   * つまりノートPCをルータにする
  
+<img width="35%" src="https://pbs.twimg.com/media/DKZLU64U8AEdULI.jpg" />
 
-![接続](https://pbs.twimg.com/media/DKZLU64U8AEdULI.jpg:large)
-
+---
 
 ## ノートPCのOS別設定方法
 
@@ -32,8 +35,9 @@
   * `$ nmap -sP <有線側のセグメント>`
 * Linux: DHCPを立てるのが面倒なので割愛
 
+---
 
-## Linuxの世界
+## <span style="text-transform:none">Linuxの世界
 
 * ほぼ全てテキストファイルでできている
   * 設定ファイル等
@@ -45,6 +49,7 @@
 * エディタとコマンドは使えないとかなりストレス
     * 自転車と一緒で使えると自然に使えるようになるので我慢して慣れられるかどうかで今後が変わる
 
+---
 
 ## エディタ
 
@@ -54,6 +59,7 @@
   * 練習コマンドがあるのでそれで練習を
     * Vimにはvimtutorというコマンドがあり、最初はこれをやるのが一番良い
 
+---
 
 ## コマンド
 
@@ -67,6 +73,7 @@
     * 標準入力から文字を受けて標準出力に加工した字を出すもの
     * 組み合わせて使う（マニュアルがあまりない）
 
+---
 
 ## フィルタコマンド
 
@@ -90,6 +97,7 @@
 
 **ところで、出力がザーッと出て使いにくくないか？**
 
+---
 
 ## コマンドの組み合わせ
 
@@ -116,6 +124,7 @@
       $ sudo find / | less
       ```
 
+---
 
 ## 正規表現の例
 
@@ -129,14 +138,16 @@
 * 上級者向け
   * AWKとgrepで10000番ポート以上のレコードを抽出のこと
 
+---
 
 ## ファイルの操作
 
 * ls, mv, rm, cp, mkdir, rmdir
   * 口頭で説明します
 
+---
 
-## man
+## <span style="text-transform:none">man
 
 * マニュアルコマンド
   ```bash
@@ -149,8 +160,9 @@
   ```
   * 詳しくは `$ man man` で。
 
+---
 
-## apt, apt-get
+## <span style="text-transform:none">apt, apt-get
 
 * APT (Advanced Packaging Tool): Debian系Linuxのパッケージシステム
   * ソフトウェアのインストールに利用
@@ -160,8 +172,9 @@
     $ sudo apt install nmap         #手打ち用
     ```
 
+---
 
-## ping
+## <span style="text-transform:none">ping
 
 * 通信先にパケットが届くか確認する時によく使う
 * `$ ping 8.8.8.8`
@@ -174,8 +187,9 @@
   * （192.168.1.254はルーターっぽいIPアドレス）
 * たまにセキュリティーのために先方がふさがっていることがある
 
+---
 
-## ip, ifconfig
+## <span style="text-transform:none">ip, ifconfig
 
 * ネットワークの設定の確認
 * ifconfig: 古い確認方法
@@ -187,6 +201,7 @@
   $ ip addr show    #IPアドレス等の確認
   ```
 
+---
 
 ## その他通信関係のコマンド
 
@@ -203,8 +218,9 @@
   $ traceroute 8.8.8.8
   ```
 
+---
 
-## scp, rsync
+## <span style="text-transform:none">scp, rsync
 
 * マシン間でファイルをコピー
   ```bash
@@ -217,6 +233,7 @@
 
 
 
+---
 
 ## 停止・再起動
 
@@ -234,6 +251,7 @@
   $ sudo reboot
   ```
 
+---
 
 ## プログラムのコンパイル
 
@@ -253,6 +271,7 @@
   もしa.outが実行できなかったら $ chmod +x a.out
   ```
 
+---
 
 ## スクリプトの実行
 
@@ -269,8 +288,9 @@
   $ ./hoge.py
   ```
 
+---
 
-## Raspbianのメンテナンス
+## <span style="text-transform:none">Raspbianのメンテナンス
 
 * rpi-update: カーネル等のアップデート
   `pi@raspberrypi:~ $ sudo rpi-update`
@@ -285,6 +305,8 @@
   * 起動時にGUIの抑制
   * ssh, SPI等の機能をON/OFF
 
+---
+
 ## 次回までの宿題
 
 * エディタが苦手な人はvimtutorをやっておく
@@ -293,6 +315,7 @@
   * Vimの場合はdein等
     * https://github.com/Shougo/dein.vim
 
+---
 
 ## 補足
 
