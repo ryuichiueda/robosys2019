@@ -37,7 +37,7 @@
 
 ---
 
-## Linuxの世界
+## <span style="text-transform:none">Linuxの世界
 
 * ほぼ全てテキストファイルでできている
   * 設定ファイル等
@@ -147,7 +147,7 @@
 
 ---
 
-## man
+## <span style="text-transform:none">man
 
 * マニュアルコマンド
   ```bash
@@ -162,7 +162,7 @@
 
 ---
 
-## apt, apt-get
+## <span style="text-transform:none">apt, apt-get
 
 * APT (Advanced Packaging Tool): Debian系Linuxのパッケージシステム
   * ソフトウェアのインストールに利用
@@ -174,7 +174,7 @@
 
 ---
 
-## ping
+## <span style="text-transform:none">ping
 
 * 通信先にパケットが届くか確認する時によく使う
 * `$ ping 8.8.8.8`
@@ -189,7 +189,7 @@
 
 ---
 
-## ip, ifconfig
+## <span style="text-transform:none">ip, ifconfig
 
 * ネットワークの設定の確認
 * ifconfig: 古い確認方法
@@ -220,7 +220,7 @@
 
 ---
 
-## scp, rsync
+## <span style="text-transform:none">scp, rsync
 
 * マシン間でファイルをコピー
   ```bash
@@ -290,7 +290,7 @@
 
 ---
 
-## Raspbianのメンテナンス
+## <span style="text-transform:none">Raspbianのメンテナンス
 
 * rpi-update: カーネル等のアップデート
   `pi@raspberrypi:~ $ sudo rpi-update`
