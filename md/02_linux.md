@@ -94,8 +94,7 @@
     ```bash
     $ find /
     ```
-
-**ところで、出力がザーッと出て使いにくくないか？**
+* **ところで、出力がザーッと出て使いにくくないか？**
 
 ---
 
@@ -171,6 +170,7 @@
     $ sudo apt-get install nmap   #スクリプト用
     $ sudo apt install nmap         #手打ち用
     ```
+* 最近は`snap`というのも出てきた
 
 ---
 
@@ -275,7 +275,7 @@
 
 ## スクリプトの実行
 
-* 次のようなPyhonのファイルhoge.pyを作ってみましょう
+* 次のようなPythonのファイルhoge.pyを作ってみましょう
   ```python
   #!/usr/bin/python
   print "Java"
@@ -293,13 +293,21 @@
 ## <span style="text-transform:none">Raspbianのメンテナンス
 
 * rpi-update: カーネル等のアップデート
-  `pi@raspberrypi:~ $ sudo rpi-update`
+```
+pi@raspberrypi:~ $ sudo rpi-update
+```
 * apt update: パッケージリストの更新
-  `pi@raspberrypi:~ $ sudo apt update`
+```
+pi@raspberrypi:~ $ sudo apt update
+```
 * apt upgrade: パッケージのアップグレード
-  `pi@raspberrypi:~ $ sudo apt upgrade`
+```
+pi@raspberrypi:~ $ sudo apt upgrade
+```
 * raspi-config: Raspberry Piの機能設定
-  `pi@raspberrypi:~ $ sudo raspi-config`
+```
+pi@raspberrypi:~ $ sudo raspi-config
+```
   * ロケールの設定
   * 言語環境の設定
   * 起動時にGUIの抑制
