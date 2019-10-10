@@ -4,6 +4,7 @@
 
 2019年10月25日@千葉工業大学
 
+---
 
 ## 今日の内容
 
@@ -15,6 +16,7 @@
 * リポジトリ
   * https://github.com/ryuichiueda/robosys_device_drivers
 
+---
 
 ## 回路の例
 
@@ -26,7 +28,9 @@
   * 抵抗をつなぐとLEDに優しい
   * 抵抗をつなぐ場合は200-300Ω程度（適当）
 
-![](gpio25.jpg)
+<img width="22%" src="./md/images/gpio25.jpg" />
+
+---
 
 ## 最初のコード
 
@@ -35,6 +39,7 @@
 * コードの中身
   * カーネルモジュールの初期化と後始末の関数を書く
   * マクロに関数名を与える
+
 ```c
 #include <linux/module.h>
 
@@ -49,10 +54,12 @@ static void __exit cleanup_mod(void)
 
 module_init(init_mod);
 module_exit(cleanup_mod);
+
 ```
 
+---
 
-## Makefileを書く
+## <span style="text-transform:none">Makefileを書く
 
 * Makefileという名前のファイルを作って次のように書く
 * インデントはタブで
@@ -71,8 +78,7 @@ clean:
         make -C /usr/src/linux M=`pwd` V=1 clean        #make cleanで実行
 ```
 
-
-
+---
 
 ## コンパイル、インストール、実行
 
@@ -91,6 +97,7 @@ myled                    735  0
 $ sudo rmmod myled
 ```
 
+---
 
 ## ログを吐くようにする
 
@@ -111,6 +118,8 @@ static void __exit cleanup_mod(void)
 }
 ```
 
+---
+
 ## 動作確認
 
 * `/var/log/messages`にカーネルモジュールの脱着が記録される
@@ -126,6 +135,8 @@ pi@raspberrypi:~/myled_lecture $ tail /var/log/messages
 ...
 Oct 23 11:44:23 raspberrypi kernel: [ 5734.994105] /home/pi/myled_lecture/myled.c is unloaded.
 ```
+
+---
 
 ## ヘッダにモジュールの情報を記述
 
@@ -144,6 +155,8 @@ static int __init init_mod(void)
 （以下略）
 ```
 
+---
+
 ## 情報の確認
 
 * modinfoというコマンドを利用
@@ -159,6 +172,8 @@ srcversion:     1278C67A0C932CB5D86D367
 depends:        
 vermagic:       4.4.27-v7+ SMP mod_unload modversions ARMv7 
 ```
+
+---
 
 ## デバイス番号の取得
 
@@ -195,6 +210,7 @@ static void __exit cleanup_mod(void)
   * これを怠るとinsmodのたびに番号が増えていくので実験すると面白い
 * `MAJOR`: devからメジャー番号を取り出すマクロ
 
+---
 
 ## メジャー番号の確認
 
@@ -208,6 +224,8 @@ $ cat /proc/devices | grep myled
 243 myled
 $ sudo rmmod myled
 ```
+
+---
 
 ## キャラクタ型デバイスを作る
 
@@ -265,6 +283,8 @@ static void __exit cleanup_mod(void)
 （略）
 ```
 
+---
+
 ## 動作確認
 
 * `mknod c 243 0`でデバイスファイルを手動作成
@@ -298,6 +318,8 @@ $ sudo rm /dev/myled0    #後始末
 $ sudo rmmod myled
 ```
 
+---
+
 ## クラスの作成と削除
 
 * `/sys/class`下にこのデバイスの情報を置く
@@ -327,7 +349,9 @@ static void __exit cleanup_mod(void)
 （以下略）
 ```
 
-## /sys下の確認
+---
+
+## <span style="text-transform:none">/sys下の確認
 
 * `/sys/class`下に`myled`というディレクトリができる
   * まだ中身は空
@@ -337,6 +361,8 @@ $ sudo insmod myled.ko
 $ ls -l /sys/class/myled/       #ディレクトリができている
 合計 0
 ```
+
+---
 
 ## クラスへの情報書き込み
 
@@ -363,7 +389,9 @@ static void __exit cleanup_mod(void)
 （以下略）
 ```
 
-## /sys下の確認
+---
+
+## <span style="text-transform:none">/sys下の確認
 
 ```bash
 $ ls -l /sys/class/myled/
@@ -380,7 +408,9 @@ $ cat dev
 243:0                #これがメジャー番号とマイナー番号
 ```
 
-## /dev下の確認
+---
+
+## <span style="text-transform:none">/dev下の確認
 
 * udevというサービスが`/sys/class/myled/myled0/dev`を見てデバイスファイルを作成
 
@@ -391,6 +421,8 @@ $ sudo rmmod myled
 $ ls -l /dev/myled0        #rmmodで自動的にデバイスファイルが消える
 ls: /dev/myled0 にアクセスできません: そのようなファイルやディレクトリはありません
 ```
+
+---
 
 ## デバイスファイルからの字の読み込み
 
@@ -413,6 +445,8 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 }
 ```
 
+---
+
 ## 動作確認
 
 （細かい手順はもう書きません）
@@ -427,6 +461,8 @@ Oct 23 14:11:10 raspberrypi kernel: [ 1462.960911] receive b
 Oct 23 14:11:10 raspberrypi kernel: [ 1462.960920] receive c
 Oct 23 14:11:10 raspberrypi kernel: [ 1462.960929] receive
 ```
+
+---
 
 ## デバイスファイルからの出力
 
@@ -453,6 +489,8 @@ static struct file_operations led_fops = {
 };
 ```
 
+---
+
 ## GPIOの操作
 
 * ピンの操作は特定のメモリアドレスへゼロイチを書き込むことで行う
@@ -463,6 +501,7 @@ static struct file_operations led_fops = {
     * 「Peripheral specification」をクリック
   * Raspberry Pi 3のbcm2837とはレジスタのアドレスの開始位置が違うので読み替え
 
+---
 
 ## レジスタアドレスのリマップ
 
@@ -488,6 +527,8 @@ static int __init init_mod(void)
 ...
 ```
 
+---
+
 ## GPIOピンを出力にする
 
 * ピンを出力にするレジスタに1を書き込む
@@ -512,6 +553,8 @@ static int __init init_mod(void)
 ...
 ```
 
+---
+
 ## ON/OFFの書き込み
 
 p. 90, 95
@@ -533,6 +576,8 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
     return 1;
 }
 ```
+
+---
 
 ## 補足
 
