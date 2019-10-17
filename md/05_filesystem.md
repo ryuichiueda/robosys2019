@@ -264,10 +264,15 @@ bluetooth             326067  22 bnep,btbcm,hci_uart
   * Raspbianの場合
     * 基本的に自分でLinuxのソースコードをダウンロードして、一度カーネルを作るのが面倒なようで手っ取り早い
       * これで整合性のあるヘッダファイルが得られる
-  * カーネルの再構築
-    * LinuxをGitHubからクローンしてビルドしてカーネルを作ります
-    * 難しいので作業をシェルスクリプトにしました: [kernel_build_and_install_for_pi2_pi3.bash](https://github.com/ryuichiueda/raspberry_pi_kernel_build_scripts/blob/master/kernel_build_and_install_for_pi2_pi3.bash)
-      * 手順
+      * やり方は次のページ
+
+---
+
+## カーネルの再構築
+
+* LinuxをGitHubからクローンしてビルドしてカーネルを作ります
+* 難しいので作業をシェルスクリプトにしました: [kernel_build_and_install_for_pi2_pi3.bash](https://github.com/ryuichiueda/raspberry_pi_kernel_build_scripts/blob/master/kernel_build_and_install_for_pi2_pi3.bash)
+  * 手順
 
        ```bash
        $ git clone https://github.com/ryuichiueda/raspberry_pi_kernel_build_scripts.git
