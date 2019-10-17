@@ -39,7 +39,7 @@
 
 ---
 
-## ストレージにデータを書く仕組み
+## ストレージにデータを記録する仕組み
 
 * ストレージがあったら、いくつかのパーティションに分け、それぞれの形式でファイルシステムをフォーマットして使う
   * ストレージの区分け（上位レイヤーから順に）
@@ -96,39 +96,44 @@ Number  Start   End     Size    Type      File system  Flags
 
 ---
 
-## パーティションの作成
+## パーティションの作成（1/2）
 
-* partedコマンドを作成
-  * 例/dev/sdcに見えるUSBメモリをext4でフォーマット
+* partedコマンドを利用
+  * 例/dev/sdcに見えるUSBメモリにext4のパーティションを作る
 
-    ```bash
-    $ sudo parted /dev/sdc
-    GNU Parted 3.2
-    Using /dev/sdc
-    Welcome to GNU Parted! Type 'help' to view a list of commands.
-    (parted) mklabel gpt                                                      
-    (parted) unit GB                                                          
-    (parted) print                                                            
-    Model: TOSHIBA TransMemory-Mx (scsi)
-    Disk /dev/sdc: 62.4GB
-    Sector size (logical/physical): 512B/512B
-    Partition Table: gpt
-    Disk Flags:
-    
-    Number  Start  End  Size  File system  Name  Flags
-    ``` 
+```bash
+$ sudo parted /dev/sdc
+GNU Parted 3.2
+Using /dev/sdc
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) mklabel gpt                                                      
+(parted) unit GB                                                          
+(parted) print                                                            
+Model: TOSHIBA TransMemory-Mx (scsi)
+Disk /dev/sdc: 62.4GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
 
-  * パーティションを作ったらext4でフォーマット
+Number  Start  End  Size  File system  Name  Flags
+``` 
 
-    ```bash
-    (parted) mkpart
-    Partition name?  []? data1                                                
-    File system type?  [ext2]? ext4
-    Start? 0                                                                  
-    End? 62.4                                                                 
-    (parted)   q
-    $ mkfs.ext4 /dev/sdc1 
-    ```
+---
+
+## パーティションの作成（2/2）
+
+
+* パーティションを作ったらext4でフォーマット
+
+```bash
+(parted) mkpart
+Partition name?  []? data1                                                
+File system type?  [ext2]? ext4
+Start? 0                                                                  
+End? 62.4                                                                 
+(parted)   q
+$ mkfs.ext4 /dev/sdc1 
+```
 
 ---
 
