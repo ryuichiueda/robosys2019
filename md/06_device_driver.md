@@ -1,8 +1,8 @@
-# ロボットシステム学第6回
+# ロボットシステム学第7回
 
 上田 隆一
 
-2019年10月25日@千葉工業大学
+2019年11月1日@千葉工業大学
 
 ---
 
@@ -34,27 +34,23 @@
 
 ## 最初のコード
 
-* 適当なディレクトリを作ってその中に
 * ファイル名は「myled.c」にしましょう
-* コードの中身
-  * カーネルモジュールの初期化と後始末の関数を書く
-  * マクロに関数名を与える
+  * 適当なディレクトリを作ってその中に置く
 
 ```c
 #include <linux/module.h>
 
-static int __init init_mod(void)
+static int __init init_mod(void) //カーネルモジュールの初期化
 {
         return 0;
 }
 
-static void __exit cleanup_mod(void)
+static void __exit cleanup_mod(void) //後始末
 {
 }
 
-module_init(init_mod);
-module_exit(cleanup_mod);
-
+module_init(init_mod);     // マクロで関数を登録
+module_exit(cleanup_mod);  // 同上
 ```
 
 ---
@@ -80,7 +76,7 @@ clean:
 
 ---
 
-## コンパイル、インストール、実行
+## コンパイル、インストール、<br />実行
 
 * insmodでインストールできる
 * `/dev/`等にはまだ何も出てこない
@@ -175,7 +171,7 @@ vermagic:       4.4.27-v7+ SMP mod_unload modversions ARMv7
 
 ---
 
-## デバイス番号の取得
+## デバイス番号の取得（1/2）
 
 ```c
 #include <linux/module.h>
@@ -191,6 +187,19 @@ static int __init init_mod(void)
 		printk(KERN_ERR "alloc_chrdev_region failed.\n");
 		return retval;
 	}
+（次ページに続く）
+```
+
+* `alloc_chrdev_region`: デバイス番号の取得
+  * 引数: dev（番号の入れ物）のアドレス、0番から1個マイナー番号が欲しい、デバイスの名前はmyled
+* `MAJOR`: devからメジャー番号を取り出すマクロ
+
+---
+
+## デバイス番号の取得（2/2）
+
+
+```
 	printk(KERN_INFO "%s is loaded. major:%d\n",__FILE__,MAJOR(dev));
 	return 0;
 }
@@ -200,15 +209,12 @@ static void __exit cleanup_mod(void)
 	unregister_chrdev_region(dev, 1);
 	printk(KERN_INFO "%s is unloaded. major:%d\n",__FILE__,MAJOR(dev));
 }
-（略）
+（以下略）
 ```
 
-* `alloc_chrdev_region`: デバイス番号の取得
-  * 引数: dev（番号の入れ物）のアドレス、0番から1個マイナー番号が欲しい、デバイスの名前はmyled
 * `unregister_chrdev_region`: デバイス番号の解放
   * 引数: dev、マイナー番号を1個返す
   * これを怠るとinsmodのたびに番号が増えていくので実験すると面白い
-* `MAJOR`: devからメジャー番号を取り出すマクロ
 
 ---
 
@@ -227,18 +233,11 @@ $ sudo rmmod myled
 
 ---
 
-## キャラクタ型デバイスを作る
+## キャラクタ型デバイスを作る（1/4）
 
-* コードに以下を追加
+* ヘッダに以下を追加
   * ヘッダファイル: `linux/cdev.h`のinclude
-  * キャラクタデバイスの挙動
-  * キャラクタデバイスの登録
-  * `static struct cdev cdv`: キャラクタデバイスの情報を格納する構造体
-  * `led_write`: デバイスファイルに書き込みがあった時の挙動
-  * `static struct file_operations led_fops`: 挙動を書いた関数のポインタを格納する構造体
-  * cdev_init, cdev_del:キャラクタデバイスの初期化と破棄
-  * file_operationsをcdev_initに渡している
-  * cdev_add: キャラクタデバイスをカーネルに登録
+  * キャラクタデバイスの情報を格納する構造体`static struct cdev cdv`: 
 
 ```c
 #include <linux/module.h>
@@ -247,7 +246,18 @@ $ sudo rmmod myled
 （中略）（MODULE_AUTHOR〜MODULE_VERSION）
 static dev_t dev;
 static struct cdev cdv;
+（続く）
+```
 
+---
+
+## キャラクタ型デバイスを作る（2/4）
+
+* キャラクタデバイスの挙動の記述と登録
+  * `led_write`: デバイスファイルに書き込みがあった時の挙動
+  * `static struct file_operations led_fops`: 挙動を書いた関数のポインタを格納する構造体
+
+```c
 static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
 {
         printk(KERN_INFO "led_write is called\n");
@@ -258,7 +268,18 @@ static struct file_operations led_fops = {
         .owner = THIS_MODULE,
         .write = led_write
 };
+（続く）
+```
 
+---
+
+## キャラクタ型デバイスを作る（3/4）
+
+* cdev_init: キャラクタデバイスの初期化
+  * file_operations渡す
+* cdev_add: キャラクタデバイスをカーネルに登録
+
+```c
 static int __init init_mod(void)
 {
         （略。デバイス番号を取得する部分）
@@ -270,7 +291,16 @@ static int __init init_mod(void)
                 printk(KERN_ERR "cdev_add failed. major:%d, minor:%d",MAJOR(dev),MINOR(dev));
                 return retval;
         }
+（続く）
+```
 
+---
+
+## キャラクタ型デバイスを作る（4/4）
+
+* cdev_del:キャラクタデバイスの破棄
+
+```c
         return 0;
 }
 
@@ -280,12 +310,12 @@ static void __exit cleanup_mod(void)
         unregister_chrdev_region(dev, 1);
         printk(KERN_INFO "%s is unloaded. major:%d\n",__FILE__,MAJOR(dev));
 }
-（略）
+（以下略）
 ```
 
 ---
 
-## 動作確認
+## 動作確認（1/2）
 
 * `mknod c 243 0`でデバイスファイルを手動作成
   * `c`: キャラクタデバイス、243: メジャー番号（場合により変わる）、0: マイナー番号
@@ -301,6 +331,11 @@ $ sudo chmod 666 /dev/myled0
 $ ls -l /dev/myled0 
 crw-rw-rw- 1 root root 243, 0 10月 23 13:00 /dev/myled0
 ```
+
+---
+
+## 動作確認（2/2）
+
 
 * デバイスファイルに4文字（abcと改行記号）書き込む
   * ログに4回、led_writeに仕掛けたprintkの出力が残る
@@ -320,10 +355,10 @@ $ sudo rmmod myled
 
 ---
 
-## クラスの作成と削除
+## クラスの作成と削除（1/2）
 
 * `/sys/class`下にこのデバイスの情報を置く
-* `class_create`で作成、`class_destroy`で削除
+* `class_create`で作成
   * `THIS_MODULE`: このモジュールを管理する構造体のポインタ
 
 ```c
@@ -341,7 +376,17 @@ static int __init init_mod(void)
         }
         return 0;
 }
+（続く）
+```
 
+
+---
+
+## クラスの作成と削除（2/2）
+
+* `class_destroy`で削除
+
+```c
 static void __exit cleanup_mod(void)
 {
         cdev_del(&cdv);
