@@ -409,9 +409,9 @@ $ ls -l /sys/class/myled/       #ディレクトリができている
 
 ---
 
-## クラスへの情報書き込み
+## クラスへの情報書き込み（1/2）
 
-* `device_create, device_destroy`: デバイス情報の作成、削除
+* `device_create`: デバイス情報の作成
   * 引数（NULLのところ以外）: クラス、デバイス、デバイスの名前、 デバイスのマイナー番号
 
 ```c
@@ -425,7 +425,17 @@ static int __init init_mod(void)
         device_create(cls, NULL, dev, NULL, "myled%d",MINOR(dev));
         return 0;
 }
+（続く）
+```
 
+
+---
+
+## クラスへの情報書き込み（2/2）
+
+* `device_destroy`: デバイス情報の削除
+
+```c
 static void __exit cleanup_mod(void)
 {
         cdev_del(&cdv);
@@ -469,7 +479,7 @@ ls: /dev/myled0 にアクセスできません: そのようなファイルや�
 
 ---
 
-## デバイスファイルからの字の読み込み
+## デバイスファイルからの字の<br />読み込み
 
 * ユーザランドからの字の書き込みをカーネルに読み込む
   * アドレス空間が違う
@@ -556,7 +566,6 @@ static struct file_operations led_fops = {
     * bcm2835のpdfには書いてない
     * このアドレスの後のレジスタの配置は同じ（Peripheral specification90,91ページ）
   * 0xA0: 必要なアドレスの範囲（91ページを読んで設定）
-
 
 ```c
 ...
