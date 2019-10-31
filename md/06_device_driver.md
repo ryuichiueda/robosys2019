@@ -23,12 +23,12 @@
 * GPIO25とGNDの間にLEDを接続
   * GPIO25: 22番ピン
   * GND: 39番ピン
-  * LEDのアノード（足の長い方）をGPIO25に
+  * LEDのアノード（足の長い方）<br />をGPIO25に
 * 抵抗はなくても特に問題ない
   * 抵抗をつなぐとLEDに優しい
-  * 抵抗をつなぐ場合は200-300Ω程度（適当）
+  * 抵抗をつなぐ場合は<br />200-300Ω程度（適当）
 
-<img width="22%" src="./md/images/gpio25.jpg" />
+<img width="42%" src="./md/images/gpio25.jpg" />
 
 ---
 
