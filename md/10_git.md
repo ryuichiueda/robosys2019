@@ -4,10 +4,13 @@
 
 2019年11月29日@千葉工業大学
 
+---
+
 ## 今日の内容
 
 * Git, GitHub
 
+---
 
 ## 自分で書いたプログラムの管理
 
@@ -20,6 +23,8 @@
   * 変更の日付等を自動で管理したい
   * 別のPCで使う。別の人が使えるようにしておく。
 
+---
+
 ## Git
 
 * 版管理（バージョン管理）システム
@@ -29,6 +34,8 @@
 * 単にバージョン管理のためだけでなく、コード公開のプラットフォームになっている
   * リポジトリの公開
   * GitHub, BitBucket
+
+---
 
 ## Gitのインストール
 
@@ -54,6 +61,8 @@ email = ueda@hogehoge.com
 editor = vim
 ```
 
+---
+
 ## リポジトリを作る
 
 * リポジトリ（repository）
@@ -65,6 +74,8 @@ editor = vim
   * リモートリポジトリをどこかに置き、そこから自分のマシンにそれをクローンしてローカルリポジトリを作成
   * ローカルリポジトリで何かファイルを更新したらリモートリポジトリに反映
 
+---
+
 ## GitHub
 
 * Gitを利用したサービス
@@ -74,6 +85,8 @@ editor = vim
 * 利用方法
   * ウェブサイト
   * コマンドライン
+
+---
 
 ## アカウント作成
 
@@ -86,6 +99,7 @@ editor = vim
 * 登録したメールアドレスに確認メールが届くのでインストラクションに従う
 * できる人は公開鍵の登録
 
+---
 
 ## リポジトリの作成
 
@@ -99,6 +113,8 @@ editor = vim
   * "Create repository"ボタンを押す
 * ウェブ画面にリポジトリの画面
   * READMEとLISENCEができている
+
+---
 
 ## リモートのリポジトリをローカルに
 
@@ -120,6 +136,8 @@ $ ls -a
 .  ..  .git  LICENSE  README.md
 ```
 
+---
+
 ## リポジトリにコードを追加
 
 * なんでもいいからプログラムを一つ置く
@@ -138,7 +156,9 @@ $ ls -a
       * git statusで確認
   * ステージに置いたファイルを登録（git commit）
     * 「コミットする」と表現
-	
+
+---
+
 ## コミットの操作
 
 ```bash
@@ -154,6 +174,8 @@ $ git commit -m "Add a file"
  1 file changed, 3 insertions(+)
  create mode 100644 hoge.bash
 ```
+
+---
 
 ## リモートへの「push」
 
@@ -172,6 +194,8 @@ To https://github.com/ryuichiueda/test.git
    b09eefb..9da0223  master -> master
 ```
 
+---
+
 ## ブランチ
 
 * ディレクトリの中の状態を分岐したもの
@@ -189,6 +213,8 @@ To https://github.com/ryuichiueda/test.git
   * dev
     master
   ```
+
+---
 
 ## ブランチでの作業とマージ
 
@@ -233,6 +259,8 @@ To https://github.com/ryuichiueda/test.git
   ```
 * master以外のブランチもリモートにpush可能 
 
+---
+
 ## 別のマシン/ディレクトリ/人とのリポジトリの共有
 
 * リポジトリは何個でも作れる
@@ -275,6 +303,8 @@ To https://github.com/ryuichiueda/test.git
   echo hoge
   ```
  
+---
+
 ## 発展
 
 * [昨年の資料（12ページ〜）](http://www.slideshare.net/ryuichiueda/20159-55493670)
@@ -287,6 +317,7 @@ To https://github.com/ryuichiueda/test.git
   * コンフリクト
     * 二つのリポジトリで同じ箇所を別の書き方で修正
 
+---
 
 ## 来週までの宿題
 
@@ -296,5 +327,5 @@ UbuntuとROSのインストール
     * https://b.ueda.tech/?post=20180617_raspi_ubuntu
 	* 2番のイメージを使う
 * Ubuntu 16.04のインストール(Raspberry Pi 3B+)
-    * Raspberry Pi 3B+ を使用している方は[上田研の齋藤篤志さんのブログ](https://www.asrobot.me/entry/2018/07/11/001603/)の「アップグレード＆ROS Kinetic＆カーネルコンパイル済み」を利用
+    * Raspberry Pi 3B+ を使用している方は[上田研の齊藤篤志さんのブログ](https://www.asrobot.me/entry/2018/07/11/001603/)の「アップグレード＆ROS Kinetic＆カーネルコンパイル済み」を利用
 
