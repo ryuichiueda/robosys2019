@@ -239,6 +239,8 @@ To https://github.com/ryuichiueda/test.git
     dev
   * master
   ```
+
+---
  
 ## ブランチでの作業とマージ(2/2)
   
@@ -281,6 +283,8 @@ To https://github.com/ryuichiueda/test.git
   $ git commit -m "Third hoge"
   $ git push
   ```
+
+---
 
 ## 別のマシン/ディレクトリ/人とのリポジトリの共有(2/2)
 
