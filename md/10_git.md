@@ -216,7 +216,7 @@ To https://github.com/ryuichiueda/test.git
 
 ---
 
-## ブランチでの作業とマージ
+## ブランチでの作業とマージ(1/2)
 
 * 開発をdevブランチで進めてコミット
   * hogeを2個にする
@@ -239,6 +239,9 @@ To https://github.com/ryuichiueda/test.git
     dev
   * master
   ```
+ 
+## ブランチでの作業とマージ(2/2)
+  
 * hoge.bashが元に戻っている
   ```bash
   $ cat hoge.bash
@@ -261,7 +264,7 @@ To https://github.com/ryuichiueda/test.git
 
 ---
 
-## 別のマシン/ディレクトリ/人とのリポジトリの共有
+## 別のマシン/ディレクトリ/人とのリポジトリの共有(1/2)
 
 * リポジトリは何個でも作れる
 * 別のマシーンかディレクトリにクローンして、編集してpushしてみましょう
@@ -278,6 +281,9 @@ To https://github.com/ryuichiueda/test.git
   $ git commit -m "Third hoge"
   $ git push
   ```
+
+## 別のマシン/ディレクトリ/人とのリポジトリの共有(2/2)
+
 * 元のリポジトリに戻ってこの更新を反映してみましょう
   ```bash
   $ cd ~/GIT/test/  #ディレクトリは各自最初にcloneしたところを指定
@@ -302,7 +308,7 @@ To https://github.com/ryuichiueda/test.git
   echo hoge
   echo hoge
   ```
- 
+
 ---
 
 ## 発展
