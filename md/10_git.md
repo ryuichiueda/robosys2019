@@ -112,7 +112,7 @@ editor = vim
       * ライセンスのプルダウンからMITライセンスを選択
   * "Create repository"ボタンを押す
 * ウェブ画面にリポジトリの画面
-  * READMEとLISENCEができている
+  * READMEとLICENCEができている
 
 ---
 
