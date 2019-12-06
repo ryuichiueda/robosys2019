@@ -317,7 +317,7 @@ To https://github.com/ryuichiueda/test.git
 
 ## 発展
 
-* [昨年の資料（12ページ〜）](http://www.slideshare.net/ryuichiueda/20159-55493670)
+* [一昨年の資料（12ページ〜）](http://www.slideshare.net/ryuichiueda/20159-55493670)
   * 自分のサーバにリモートリポジトリを作る
   * フォーク
     * 人のリポジトリを自分のところに持ってくる
@@ -333,9 +333,8 @@ To https://github.com/ryuichiueda/test.git
 
 UbuntuとROSのインストール
 
-* Ubuntu 16.04のインストール(Raspberry Pi 3)
-    * https://b.ueda.tech/?post=20180617_raspi_ubuntu
-	* 2番のイメージを使う
-* Ubuntu 16.04のインストール(Raspberry Pi 3B+)
-    * Raspberry Pi 3B+ を使用している方は[上田研の齊藤篤志さんのブログ](https://www.asrobot.me/entry/2018/07/11/001603/)の「アップグレード＆ROS Kinetic＆カーネルコンパイル済み」を利用
-
+* Ubuntu 18.04のインストール
+    * https://wiki.ubuntu.com/ARM/RaspberryPi#arm64 からarm64のUbuntu 18.04イメージをダウンロードしてmicroSDに
+    * このツールを使ってください: https://www.balena.io/etcher/
+* ROSのインストール
+    * https://github.com/ryuichiueda/ros_setup_scripts_Ubuntu18.04_server を使う
