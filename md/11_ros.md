@@ -66,8 +66,8 @@
 
 ## さらに便利に使う
 
-* ROS化されているキラーコンテンツ
-  * slam_gmapping, ナビゲーションメタパッケージ
+* ROS化されている重要ソフトウェア
+  * gmapping, cartographer, ナビゲーションメタパッケージ
     * 地図生成（次のページにデモ）、位置推定、経路生成
   * MoveIt!
     * 腕の動作計画 腕先の位置を入力→関節角を計算（逆運動学）
@@ -75,33 +75,34 @@
 
 ---
 
-## ROSを使ったSLAMの様子
+## ROSを使ったSLAMの応用例
 
-* https://www.youtube.com/embed/b2kYQ11PUSI"
-  * ポイント: SLAMのコードは書いてない
-    * aptでSLAM（Gmapping）のコードが入る
-    * デッドレコニングのコードをちょっと書いただけ
+* コントローラでロボットに移動経路を教え、<br />そのあとロボットが自律で経路を移動
+    * 移動経路を教えているときにロボットは<br />SLAMで地図を作り、通った位置を記録
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eVHkHOCsHns" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+* ポイント: SLAMのコードは一切書いてない
 
 ---
 
-## ROSを使ったナビゲーションの様子
+## ROSを使ったマニピュレーションの様子
 
-* https://youtu.be/RpPcmyXOcr4
-  * SLAMをした後のナビゲーション
-    * 自己位置推定、障害物回避、...
-    * 足回りもROSのパッケージ化
+
+* https://twitter.com/i/status/1201399538541400064
+  * 2年生有志作
+  * 動きはMoveIt!が生成
 
 ---
 
 ## ROSのインストール
 
-* Ubuntu 16.04にインストールして使用
-  * 次のリポジトリにインストーラ
-    * https://github.com/ryuichiueda/ros_setup_scripts_Ubuntu16.04_server
-      * 中にあるシェルスクリプトをstep0.bash, step1.bash, locale.ja.bashと実行すればOK
+* Ubuntu 18.04にインストールして使用
+  * [GitHubのリポジトリ](https://github.com/ryuichiueda/ros_setup_scripts_Ubuntu18.04_server)にインストーラ
+    * 中にあるシェルスクリプトをstep0.bash, step1.bash, locale.ja.bashと実行すればOK<br />　
 * 講義ではインストール済みのイメージファイルを利用
-  * 参考: [昨年の講義資料](https://lab.ueda.tech/?presenpress=%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%AD%A62016%E7%AC%AC12%E5%9B%9E#/15)
-  * Raspberry Pi 3B+ を使用している方は[上田研の齋藤篤志さんのブログ](https://www.asrobot.me/entry/2018/07/11/001603/)を参照
+  * [このページ](https://b.ueda.tech/?post=20190618_raspimouse)の「Raspberry Pi 3B+用のUbuntu 18.04にROSをインストールしたもの」
+
 ---
 
 ## 動作確認
@@ -136,73 +137,10 @@ started core service [/rosout]
 
 ---
 
-## ROSのノード
+## ワークスペースの準備
 
-* プログラムのプロセス一つ一つが「ノード」と呼ばれる
-* ノードの例
-  * cv_cameraとmjpeg_serverを立ち上げる（roscoreは立ち上げておく）
-
-  ```bash
-  $ rosrun cv_camera cv_camera_node 
-  $ rosrun mjpeg_server mjpeg_server 
-  ```
-
-  * ノードの確認
-
-  ```bash
-  $ rosnode list
-  /cv_camera
-  /mjpeg_server
-  /rosout
-  ```
-
-* ディレクトリのように管理されている
-
----
-
-## トピック・メッセージ
-
-* 今度はrostopic listと打ってみる
-  * データをやり取りする口（トピック）が表示される
-
-  ```bash
-  $ rostopic list
-  /cv_camera/camera_info
-  /cv_camera/image_raw
-  /rosout
-  /rosout_agg
-  ```
-
-  * トピックからデータを取り出す（先ほどもやりました）
-
-    ```bash
-    $ rostopic echo /cv_camera/image_raw
-    ```
-
-    * このデータは「メッセージ」と呼ばれる
-
----
-
-## パブリッシャ・サブスクライバ
-
-* 各ノードがトピックを通じてメッセージを融通することで全体として仕事を行う
-* mjpeg_serverは/cv_camera/image_rawからカメラ画像を取得して、ブラウザに画像を配信
-* データを出す側が**パブリッシャ**
-* データを受け取る側が**サブスクライバ**
-* この構造でサブスクライバ側の柔軟な組み換えが可能に
-  * ブラウザに配信するノード、顔検出をするノード、mp4に変換するノード・・・
-
----
-
-## ROSプログラミングの準備
-
-* パブリッシャ、サブスクライバを作ってみましょう
-* その前に・・・
-  * 「ワークスペース」（作業場）を作る
-  * 講義で使うイメージでは作成済み
-
-* 手順
-
+* ワークスペース: 作業場
+  * 構築手順
 ```bash
 $ cd
 $ mkdir -p catkin_ws/src
@@ -212,9 +150,7 @@ Creating symlink "/home/ubuntu/catkin_ws/src/CMakeLists.txt" pointing to "/opt/r
 $ ls
 CMakeLists.txt
 ```
-
-* .bashrcの末尾に以下を記述
-
+  * .bashrcの末尾に以下を記述
 ```bash
 source /opt/ros/melodic/setup.bash          #これは元からある
 source ~/catkin_ws/devel/setup.bash         #ここから3行追加
@@ -222,22 +158,94 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 ```
 
-* 環境のビルド
+---
 
+* 構築手順の続き
+  * 環境のビルド
 ```bash
 $ cd ~/catkin_ws
 $ catkin_make
 $ source ~/.bashrc
 ```
-
-
-* 確認
-  * ROS_PACKAGE_PATHにcatkin_ws/srcがセットされているはず
-
+  * 確認
+    * ROS_PACKAGE_PATHにcatkin_ws/srcがセットされているはず
 ```bash
 $ echo $ROS_PACKAGE_PATH
 /home/ubuntu/catkin_ws/src:/opt/ros/melodic/share
 ```
+
+---
+
+## ROSのノード
+
+* プログラムのプロセス一つ一つが「ノード」と呼ばれる
+* ノードの使用例（seiga-k/sysmon_rosパッケージを使う）
+  * ハードウェアの状態をモニタするROSパッケージをインストール
+```
+$ sudo apt install ros-melodic-roslint 
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/seiga-k/sysmon_ros.git
+$ cd ..
+$ catkin_make -j 1
+$ roscore &
+$ roslaunch sysmon_ros sysmon.launch 
+```
+  * ノードの確認
+```
+### ディレクトリのように管理されている ###
+$ rosnode list
+/rosout
+/sysmon/cpumon
+/sysmon/diskmon
+/sysmon/memmon
+/sysmon/netmon
+/sysmon/tempmon
+```
+
+---
+
+## トピック・メッセージ
+
+* 今度はrostopic listと打ってみる
+  * データをやり取りする口（トピック）が表示される
+```
+$ rostopic list
+/rosout
+/rosout_agg
+/sysmon/cpumon/cpu
+/sysmon/cpumon/cpu0
+/sysmon/cpumon/cpu1
+・・・
+```
+* トピックからデータを取り出す
+  * このデータは「メッセージ」と呼ばれる
+```
+$ rostopic echo /sysmon/netmon/eth0
+if_name: "eth0"
+ip: [192.168.2.20]
+tx_bps: 0
+rx_bps: 4432
+tx_error_rate: 0.0
+rx_error_rate: 0.0
+・・・
+```
+
+---
+
+## パブリッシャ・サブスクライバ
+
+* 各ノードがトピックを通じてメッセージを融通することで全体として仕事を行う
+* データを出す側が**パブリッシャ**
+* データを受け取る側が**サブスクライバ**
+* この構造でノードの柔軟な組み換えが可能に
+  * インタフェースが同じならプログラムを取り替えられる
+  * 例: mjpeg_server（古い） -> web_video_server（新しい）
+
+---
+
+## ROSプログラミングの準備
+
+* パブリッシャ、サブスクライバを作ってみましょう
 
 ---
 
@@ -276,15 +284,14 @@ $ cd scripts/
 import rospy
 from std_msgs.msg import Int32
 
-if __name__ == '__main__':
-    rospy.init_node('count')
-    pub = rospy.Publisher('count_up', Int32, queue_size=1)
-    rate = rospy.Rate(10)
-    n = 0
-    while not rospy.is_shutdown():
-        n += 1
-        pub.publish(n)
-        rate.sleep()
+rospy.init_node('count')
+pub = rospy.Publisher('count_up', Int32, queue_size=1)
+rate = rospy.Rate(10)
+n = 0
+while not rospy.is_shutdown():
+    n += 1
+    pub.publish(n)
+    rate.sleep()
 ```
 
 ---
@@ -306,9 +313,6 @@ data: 1430
 ---
 data: 1431
 ---
-data: 1432
----
-data: 1433
 ...
 ```
 
@@ -402,7 +406,7 @@ data: 1056
 
 ---
 
-## その他
+## その他（1/2）
 
 * 型
   * `std_msgs`で定義されているものの他にもたくさん
@@ -415,6 +419,12 @@ data: 1056
   * サービスと同じくノード間でプログラムを呼び出す仕組み
     * 中断したり途中経過をみたりすることが可能
     * 時間のかかる処理の実装に利用される
+
+
+---
+
+## その他（2/2）
+
 * package.xml
   * パッケージの情報が書かれる
   * メンテナの名前、ライセンス、他のパッケージの依存関係等、配布に必要な情報
