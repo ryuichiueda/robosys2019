@@ -4,10 +4,13 @@
 
 2019年12月6日@千葉工業大学
 
+---
+
 ## 今日の内容
 
 * ROS
 
+---
 
 ## ROS: robot operating system
 
@@ -22,6 +25,8 @@
   * マニュアル等: http://wiki.ros.org/ja
 
 
+---
+
 ## どんなものか
 
 * 本体: プロセス間通信をつかさどる
@@ -32,9 +37,11 @@
   * ビルドシステム、パッケージ管理、テストツール、・・・
 
 
-<span style="color:red">と書いてもよくわからんのでこちらで動かしてみます</span>
+<span style="color:red;font-size:50%">と書いてもよくわからんのでこちらで動かしてみます</span>
 
 
+
+---
 
 ## デモ
 
@@ -43,20 +50,19 @@
   * 1: ROS・ワークスペースのセットアップ（来週）
   * 2: 必要なパッケージのダウンロードとビルド
     ```bash
-    $ sudo apt install ros-kinetic-cv-camera
-    $ sudo apt install ros-kinetic-cv-bridge
-    $ cd ~/catkin_ws/src
-    $ git clone git@github.com:RobotWebTools/mjpeg_server.git
-    $ cd ..
-    $ catkin_make
+    $ sudo apt install ros-melodic-cv-camera
+    $ sudo apt install ros-melodic-cv-bridge
+    $ sudo apt install ros-melodic-web-video-server
     ```
   * 3: 見る
     ```
     $ roscore &
     $ rosrun cv_camera cv_camera_node &
-    $ rosrun mjpeg_server mjpeg_server
+    $ rosrun web_video_server web_video_server
     ブラウザでhttp://<IPアドレス>:8080/stream?topic=/cv_camera/image_raw
     ```
+
+---
 
 ## さらに便利に使う
 
@@ -67,6 +73,8 @@
     * 腕の動作計画 腕先の位置を入力→関節角を計算（逆運動学）
   * その他、様々なハード・ソフトがROS化
 
+---
+
 ## ROSを使ったSLAMの様子
 
 * https://www.youtube.com/embed/b2kYQ11PUSI"
@@ -74,12 +82,16 @@
     * aptでSLAM（Gmapping）のコードが入る
     * デッドレコニングのコードをちょっと書いただけ
 
+---
+
 ## ROSを使ったナビゲーションの様子
 
 * https://youtu.be/RpPcmyXOcr4
   * SLAMをした後のナビゲーション
     * 自己位置推定、障害物回避、...
     * 足回りもROSのパッケージ化
+
+---
 
 ## ROSのインストール
 
@@ -90,6 +102,8 @@
 * 講義ではインストール済みのイメージファイルを利用
   * 参考: [昨年の講義資料](https://lab.ueda.tech/?presenpress=%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%AD%A62016%E7%AC%AC12%E5%9B%9E#/15)
   * Raspberry Pi 3B+ を使用している方は[上田研の齋藤篤志さんのブログ](https://www.asrobot.me/entry/2018/07/11/001603/)を参照
+---
+
 ## 動作確認
 
 * `roscore`
@@ -106,7 +120,7 @@ SUMMARY
 ========
 
 PARAMETERS
-* /rosdistro: kinetic
+* /rosdistro: melodic
 * /rosversion: 1.12.6
 
 NODES
@@ -119,6 +133,8 @@ setting /run_id to b749a100-d0dc-11e5-a506-b827eb17cb96
 process[rosout-1]: started with pid [1452]
 started core service [/rosout]
 ```
+
+---
 
 ## ROSのノード
 
@@ -142,6 +158,8 @@ started core service [/rosout]
 
 * ディレクトリのように管理されている
 
+---
+
 ## トピック・メッセージ
 
 * 今度はrostopic listと打ってみる
@@ -163,6 +181,8 @@ started core service [/rosout]
 
     * このデータは「メッセージ」と呼ばれる
 
+---
+
 ## パブリッシャ・サブスクライバ
 
 * 各ノードがトピックを通じてメッセージを融通することで全体として仕事を行う
@@ -171,6 +191,8 @@ started core service [/rosout]
 * データを受け取る側が**サブスクライバ**
 * この構造でサブスクライバ側の柔軟な組み換えが可能に
   * ブラウザに配信するノード、顔検出をするノード、mp4に変換するノード・・・
+
+---
 
 ## ROSプログラミングの準備
 
@@ -186,7 +208,7 @@ $ cd
 $ mkdir -p catkin_ws/src
 $ cd ~/catkin_ws/src
 $ catkin_init_workspace 
-Creating symlink "/home/ubuntu/catkin_ws/src/CMakeLists.txt" pointing to "/opt/ros/kinetic/share/catkin/cmake/toplevel.cmake"
+Creating symlink "/home/ubuntu/catkin_ws/src/CMakeLists.txt" pointing to "/opt/ros/melodic/share/catkin/cmake/toplevel.cmake"
 $ ls
 CMakeLists.txt
 ```
@@ -194,7 +216,7 @@ CMakeLists.txt
 * .bashrcの末尾に以下を記述
 
 ```bash
-source /opt/ros/kinetic/setup.bash          #これは元からある
+source /opt/ros/melodic/setup.bash          #これは元からある
 source ~/catkin_ws/devel/setup.bash         #ここから3行追加
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
@@ -214,8 +236,10 @@ $ source ~/.bashrc
 
 ```bash
 $ echo $ROS_PACKAGE_PATH
-/home/ubuntu/catkin_ws/src:/opt/ros/kinetic/share
+/home/ubuntu/catkin_ws/src:/opt/ros/melodic/share
 ```
+
+---
 
 ## パッケージを作る
 
@@ -237,6 +261,8 @@ $ cd mypkg/
 $ mkdir scripts
 $ cd scripts/
 ```
+
+---
 
 ## パブリッシャを作る
 
@@ -261,6 +287,8 @@ if __name__ == '__main__':
         rate.sleep()
 ```
 
+---
+
 ## ノードの実行
 
 注意: あらかじめroscoreを立ち上げておきましょう。
@@ -283,6 +311,8 @@ data: 1432
 data: 1433
 ...
 ```
+
+---
 
 ## サブスクライバを作る
 
@@ -307,6 +337,8 @@ if __name__ == '__main__':
     rospy.spin()
 ```
 
+---
+
 ## twice.pyの実行
 
 * roscore、rosrun mypkg count.pyを事前に実行しておく
@@ -322,6 +354,8 @@ $ rosrun mypkg twice.py
 [INFO] [1484659841.062162]: 10
 ...
 ```
+
+---
 
 ## パブリッシャとサブスクライバの同居
 
@@ -348,6 +382,8 @@ if __name__ == '__main__':
         rate.sleep()
 ```
 
+---
+
 ## 実行
 
 * ノードを立ち上げて`rostopic echo /twice`でトピックとしてデータを得る
@@ -363,6 +399,8 @@ data: 1054
 data: 1056
 ...
 ```
+
+---
 
 ## その他
 
