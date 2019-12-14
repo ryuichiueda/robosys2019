@@ -12,7 +12,7 @@
 
 ---
 
-## ROS: robot operating system
+## <span style="text-transform:none">ROS: robot operating system
 
 * ロボットのソフトウェアコンポーネントを作って
   動作させるためのフレームワーク/ミドルウェア
@@ -343,7 +343,7 @@ if __name__ == '__main__':
 
 ---
 
-## twice.pyの実行
+## <span style="text-transform:none">twice.pyの実行
 
 * roscore、rosrun mypkg count.pyを事前に実行しておく
 * 二倍になった数字が端末上に表示される
