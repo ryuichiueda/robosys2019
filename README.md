@@ -10,4 +10,6 @@
 * lesson10: https://ryuichiueda.github.io/robosys2019/lesson10.html
 * lesson11: https://ryuichiueda.github.io/robosys2019/lesson11.html
 * lesson12: https://ryuichiueda.github.io/robosys2019/lesson12.html
+* lesson13: https://ryuichiueda.github.io/robosys2019/lesson13.html
+* lesson14: https://ryuichiueda.github.io/robosys2019/lesson14.html
 
